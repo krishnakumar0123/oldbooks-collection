@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       body {
+        font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThBWnrvV_Tk0dNQbjlWga-IdCk6TrGzMzNgywKcSo42ebhE7oo4Jg5aOXELI8VZ2yleSo&usqp=CAU');
+            background-size: cover;
+            background-position: center;
+            transition: background 0.5s ease-in-out;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #1e1d1d;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            transition: margin 0.5s ease-in-out;
+        }
+
+        .search-bar input {
+            padding: 8px;
+            margin-right: 8px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 8px 16px;
+            background-color: #208ae1;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .site-title {
+            font-family: 'Your Vintage Font', cursive; /* Replace 'Your Vintage Font' with the actual font you want to use */
+            font-size: 36px; /* Adjust the font size as needed */
+            color: #fff; /* Text color */
+            text-align: center;
+            margin-right: auto;
+        }
+
+        .user-section a {
+            color: #100a01;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            transition: padding 0.5s ease-in-out;
+        }
+
+        .classification-routing {
+    width: 33.33%;
+    margin-right: 20px;
+    background-color: #68b2eb;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: width 0.5s ease-in-out;
+    border-radius: 15px; /* Add border-radius for curved edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for a subtle lift */
+    overflow: hidden; /* Ensure overflow is hidden for rounded corners */
+}
+
+.classification-routing h2 {
+    color: #d2ea19;
+    font-size: 1.5em; /* Increase font size for better visibility */
+    margin-bottom: 15px; /* Add some spacing below the heading */
+}
+
+.classification-routing ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.classification-routing li {
+    margin-bottom: 10px;
+}
+
+/* Add hover effect for a modern touch */
+.classification-routing:hover {
+    width: 35%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #1a1a1c; /* Change background color on hover */
+    transform: translateY(-5px); /* Add a slight lift effect */
+}
+
+        .book-content {
+            flex: 1;
+        }
+
+        .book-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .book {
+            border: 1px solid #b5afaf;
+            padding: 10px;
+            max-width: 300px;
+            transition: border 0.5s ease-in-out, transform 0.5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .book:hover {
+            border-color: #4ebc83;
+            transform: scale(1.05);
+        }
+
+        .book-details {
+            margin-top: 10px;
+        }
+
+        footer {
+            margin-top: 20px;
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #0e0101;
+            padding: 10px;
+            text-align: center;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
+
+        /* Loading Animation Styles */
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 1;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <title>Old Books Collection</title>
+</head>
+
+<body>
+    <header>
+        <div class="search-bar">
+            
+            <input type="text" placeholder="Search..." oninput="search()">
+            <button onclick="search()">Search</button>
+            <div class="site-title">Old Books Collection</div>
+        </div>
+        <div class="user-section">
+            <button onclick="redirectTo('login.html')">Login</button>
+            <button onclick="redirectTo('signup.html')">Signup</button>
+        </div>
+        <script>
+            function redirectTo(page) {
+                window.location.href = page;
+            }
+        </script>
+         
+    </header>
+    <main>
+          <!-- Introductory Section -->
+          <section class="intro-section">
+                    
+            <h1>Welcome to the Old Books Collection</h1>
+            <p>
+                Delve into the rich tapestry of human knowledge with the Old Books Collection. Our curated assortment of
+                aged volumes transports you to eras gone by, offering a glimpse into the thoughts, wisdom, and stories
+                that have shaped civilizations throughout history.
+            </p>
+            <p>
+                These old books are more than dusty relics; they are gateways to forgotten worlds, repositories of
+                timeless knowledge, and conduits to the minds of those who came before us. From science fiction to
+                education, history to geography, each book is a treasure waiting to be discovered and cherished.
+            </p>
+            <p>
+                Explore the significance of old books as we celebrate the enduring importance of preserving and
+                passing down the intellectual heritage of humanity. Navigate through the classifications below to
+                embark on a journey through the ages, where the pages of the past come alive.
+            </p>
+            <img src="https://i.pinimg.com/736x/f2/12/e1/f212e1840b7e8c404a3f107145dfa1ab.jpg" alt="Old Books Collection">
+            <style>
+                /* Add styles for the introduction section */
+                .intro-section {
+                    text-align: center;
+                    padding: 40px;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    border-radius: 15px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    margin: 20px 0;
+                    position: relative;
+                }
+            
+                .intro-section h1 {
+                    font-size: 2.5em;
+                    color: #333;
+                    margin-bottom: 20px;
+                }
+            
+                .intro-section p {
+                    font-size: 1.2em;
+                    line-height: 1.6;
+                    color: #555;
+                    margin-bottom: 15px;
+                }
+            
+                .intro-section img {
+                    max-width: 100%;
+                    border-radius: 8px;
+                    margin-top: 20px;
+                }
+            </style>
+            
+        </section>
+    </main>
+
+   <main>
+
+        
+         <!-- Introductory Section -->
+        <section class="classification-routing">
+            <h2>Classifications</h2>
+            <nav>
+                <ul id="navigation">
+                    <li><a href="#sci-fi">Sci-Fi</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#history">History</a></li>
+                    <li><a href="#biology">Biology</a></li>
+                    <li><a href="#languages">Languages</a></li>
+                    <li><a href="#sports">Sports</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#olympics">Olympics</a></li>
+                    <li><a href="#current-affairs">Current Affairs</a></li>
+                    <li><a href="#religious">Religious</a></li>
+                    <li><a href="#vedas">Vedas</a></li>
+                    <li><a href="#physics">Physics</a></li>
+                    <li><a href="#chemistry">Chemistry</a></li>
+                    <li><a href="#journals">Journals</a></li>
+                    <li><a href="#geography">Geography</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section>
+            <div class="intro-and-classification-container">
+    
+            
+              
+       
+
+        <main id="content">
+            <!-- Content will be dynamically loaded here based on routing -->
+        </main>
+    </main>
+
+    <footer>
+        &copy; 2023 Old Books Collection
+    </footer>
+
+    <script>
+       
+       const bookData = {
+        'sci-fi': [
+        { 
+            title: 'Dune',
+            author: 'Frank Herbert',
+            year: 1965,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41LmPEurOOL.jpg',
+            summary: 'Dune is a science fiction novel that explores the complex politics and ecology of the desert planet Arrakis, where a valuable spice is mined.'
+        },
+        { 
+            title: 'Neuromancer',
+            author: 'William Gibson',
+            year: 1984,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81pIICZO2PL._AC_UF1000,1000_QL80_.jpg',
+            summary: 'Neuromancer is a cyberpunk novel that follows a washed-up computer hacker hired for one last job that takes him into a world of artificial intelligence.'
+        },
+        { 
+            title: 'Ender\'s Game',
+            author: 'Orson Scott Card',
+            year: 1985,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81nTNtqEOCL._AC_UF1000,1000_QL80_.jpg',
+            summary: 'Ender\'s Game is a military science fiction novel that tells the story of a young boy, Ender Wiggin, who is recruited to attend a space-based military school.'
+        },
+        { 
+            title: 'Snow Crash',
+            author: 'Neal Stephenson',
+            year: 1992,
+            image: 'https://cdn.kobo.com/book-images/20b7765a-763e-49c0-88bf-6300854fd827/353/569/90/False/snow-crash.jpg',
+            summary: 'Snow Crash is a cyberpunk novel that explores a near-future America where the Mafia delivers pizzas and information is a powerful drug.'
+        },
+        { 
+            title: 'The Left Hand of Darkness',
+            author: 'Ursula K. Le Guin',
+            year: 1969,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71XqE4caMNL._AC_UF1000,1000_QL80_.jpg',
+            summary: 'The Left Hand of Darkness is a science fiction novel that explores themes of gender and sexuality on a distant planet called Gethen.'
+        },
+        { 
+            title: 'Hyperion',
+            author: 'Dan Simmons',
+            year: 1989,
+            image: 'https://upload.wikimedia.org/wikipedia/en/7/73/Hyperion_cover.jpg',
+            summary: 'Hyperion is a science fiction novel that tells the story of seven pilgrims on a journey to the distant world of Hyperion, each sharing their tales.'
+        },
+        { 
+            title: 'Foundation',
+            author: 'Isaac Asimov',
+            year: 1951,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41sIWKtP-4L.jpg',
+            summary: 'Foundation is a science fiction novel that explores the decline and fall of a vast galactic empire and the efforts to shorten the ensuing dark age.'
+        },
+        { 
+            title: 'The Hitchhiker\'s Guide to the Galaxy',
+            author: 'Douglas Adams',
+            year: 1979,
+            image: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1404613595i/13.jpg',
+            summary: 'The Hitchhiker\'s Guide to the Galaxy is a comedic science fiction series following the misadventures of an unwitting human, Arthur Dent.'
+        },
+        { 
+            title: 'Brave New World',
+            author: 'Aldous Huxley',
+            year: 1932,
+            image: 'https://upload.wikimedia.org/wikipedia/en/6/62/BraveNewWorld_FirstEdition.jpg',
+            summary: 'Brave New World is a dystopian novel that explores a future society where people are engineered for specific roles and controlled through pleasure.'
+        },
+        { 
+            title: 'The War of the Worlds',
+            author: 'H.G. Wells',
+            year: 1897,
+            image: 'https://www.gutenberg.org/files/36/36-h/images/cover.jpg',
+            summary: 'The War of the Worlds is a classic science fiction novel depicting an alien invasion of Earth by Martians.'
+        },
+    
+        ],
+         'education': [
+         { 
+            title: 'How to Learn Anything',
+            author: 'John Smith',
+            year: 2010,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41+VriNbcyS.jpg',
+            summary: 'How to Learn Anything provides practical tips and strategies for effective learning, covering topics such as memory techniques and time management. The book emphasizes personalized learning approaches to enhance knowledge retention.'
+        },
+        { 
+            title: 'The Art of Problem Solving',
+            author: 'Jane Doe',
+            year: 2015,
+            image: 'https://artofproblemsolving.com/assets/images/home_test/backgrounds/vid_cloud.png',
+            summary: 'The Art of Problem Solving explores various problem-solving techniques and approaches, helping readers develop critical thinking skills. The book covers a range of problems from different domains to sharpen analytical abilities.'
+        },
+        { 
+            title: 'Effective Study Techniques',
+            author: 'Robert Johnson',
+            year: 2008,
+            image: 'https://books.google.co.in/books/publisher/content?id=oneWAwAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U0uUrER-IJFC0qnW2YSnIiaEF9RZg&w=1280',
+            summary: 'Effective Study Techniques offers practical advice on how to optimize your study sessions and improve information retention. The book provides insights into creating efficient study plans and using various tools for better understanding.'
+        },
+        { 
+            title: 'Mind Maps for Success',
+            author: 'Emily Brown',
+            year: 2012,
+            image: 'https://books.google.co.in/books/publisher/content?id=6DkYAgAAQBAJ&pg=PA1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U0CHpksOBvNW0HaF2OHK4oGo3BnJw&w=1280',
+            summary: 'Mind Maps for Success introduces the concept of mind mapping as a tool for organizing thoughts, enhancing creativity, and improving memory. The book guides readers through creating effective mind maps for different purposes.'
+        },
+        { 
+            title: 'The Science of Learning',
+            author: 'Michael Adams',
+            year: 2017,
+            image: 'https://books.google.co.in/books/publisher/content?id=GkkgEAAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U1n7hvXcUrVZPWKShlE-4xwsOALeQ&w=1280',
+            summary: 'The Science of Learning delves into the cognitive and neurological aspects of the learning process. It explores the latest research in educational neuroscience and provides practical applications for effective teaching.'
+        },
+        { 
+            title: 'Critical Thinking Skills',
+            author: 'Sarah Williams',
+            year: 2013,
+            image: 'https://tscfm.org/wp-content/uploads/2021/04/why-is-critical-thinking-important-1024x768.jpg',
+            summary: 'Critical Thinking Skills is a guide to developing strong analytical and critical thinking abilities. The book covers logical reasoning, problem-solving, and decision-making, offering practical exercises to hone these skills.'
+        },
+        { 
+            title: 'Mastering Mathematics',
+            author: 'Daniel Lee',
+            year: 2005,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61DngjMErfL._AC_UF1000,1000_QL80_.jpg',
+            summary: 'Mastering Mathematics provides a comprehensive approach to mastering various mathematical concepts. The book includes clear explanations, examples, and practice problems to enhance mathematical proficiency.'
+        },
+        { 
+            title: 'Effective Communication in Education',
+            author: 'Alice Taylor',
+            year: 2018,
+            image: 'https://books.google.co.in/books/content?id=jzD9iPWYcIsC&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U1fJsjPcqC8Nd_J0Qs0cmCMqzr9hA&w=1280',
+            summary: 'Effective Communication in Education explores the importance of communication in the educational context. The book covers various aspects of communication, including verbal and non-verbal communication, fostering positive relationships in the educational setting.'
+        },
+        { 
+            title: 'History of Education',
+            author: 'William Turner',
+            year: 2011,
+            image: 'https://encrypted.google.com/books?id=5jmdDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&h=145&w=100',
+            summary: 'History of Education provides an overview of the evolution of educational systems throughout history. The book explores key milestones, influential educators, and changes in educational philosophies.'
+        },
+        { 
+            title: 'Educational Psychology',
+            author: 'Laura White',
+            year: 2016,
+            image: 'https://books.google.co.in/books/content?id=RGY2054HE4kC&pg=PR2&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U34-1AqDY8tremA7KDCLqGvVyjCWA&w=1280',
+            summary: 'Educational Psychology delves into the psychological principles that influence learning and teaching. The book covers topics such as cognitive development, motivation, and classroom management.'
+        },
+        
+            
+       ],    
+        'history': 'History books content goes here.',
+        'biology': 'Biology books content goes here.',
+        'languages': 'Languages books content goes here.',
+        'sports': 'Sports books content goes here.',
+        'games': 'Games books content goes here.',
+        'olympics': 'Olympics books content goes here.',
+        'current-affairs': 'Current Affairs books content goes here.',
+        'religious': 'Religious books content goes here.',
+        'vedas': 'Vedas books content goes here.',
+        'physics': 'Physics books content goes here.',
+        'chemistry': 'Chemistry books content goes here.',
+        'journals': 'Journals books content goes here.',
+        'geography': [
+        { 
+            title: 'Atlas of the World',
+            author: 'Jennifer Smith',
+            year: 2012,
+            image: 'https://m.media-amazon.com/images/I/41Tc0OjJdQL._SY445_SX342_.jpg',
+            summary: 'Atlas of the World provides a comprehensive collection of maps covering various aspects of the Earth, including political boundaries, physical features, and cultural landscapes. The book serves as a valuable reference for exploring the diversity of our planet.'
+        },
+        { 
+            title: 'Geopolitics: A Global Perspective',
+            author: 'David Johnson',
+            year: 2015,
+            image: 'https://businessgraduatesassociation.com/app/uploads/elementor/thumbs/Geopolitics-world-leaders-global-oeyvq8mxsb72aspnnseslzcpl7mz9shcebs64kl0oo.jpg',
+            summary: 'Geopolitics: A Global Perspective explores the political and economic interactions among nations on a global scale. The book analyzes geopolitical events, conflicts, and trends shaping the modern world.'
+        },
+        { 
+            title: 'The Physical Geography of Earth',
+            author: 'Sarah Davis',
+            year: 2008,
+            image: 'https://s3-us-west-2.amazonaws.com/courses-images-archive-read-only/wp-content/uploads/sites/567/2015/09/21153204/Earth_poster.svg_.png',
+            summary: 'The Physical Geography of Earth provides an in-depth study of Earth\'s physical features, including landforms, climate, and ecosystems. The book explores the processes that shape the Earth\'s surface and influence natural environments.'
+        },
+        { 
+            title: 'Human Geography: Concepts and Issues',
+            author: 'Michael Adams',
+            year: 2014,
+            image: 'https://books.google.co.in/books/publisher/content?id=5791AwAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U1e-ax_vRlgVYPM6QKm8ogL0Yp54w&w=1280',
+            summary: 'Human Geography: Concepts and Issues examines the relationship between humans and their environments. The book covers topics such as population, migration, culture, and urbanization, offering insights into global patterns and challenges.'
+        },
+        { 
+            title: 'Cartography: Maps and Map-Making',
+            author: 'Robert Turner',
+            year: 2017,
+            image: 'https://i0.wp.com/talkinghumanities.blogs.sas.ac.uk/files/2020/04/Cartography.jpg?resize=1080%2C675&ssl=1',
+            summary: 'Cartography: Maps and Map-Making explores the art and science of map creation. The book covers cartographic techniques, design principles, and the role of maps in representing spatial information.'
+        },
+        { 
+            title: 'The Geography of Oceans and Continents',
+            author: 'Emily Brown',
+            year: 2010,
+            image: 'https://books.google.co.in/books/content?id=xogEaAfvsnsC&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U3uv7ROnCDhA8wSJM1uz_2FfiLZPg&w=1280',
+            summary: 'The Geography of Oceans and Continents explores the physical and cultural features of Earth\'s major landforms and bodies of water. The book provides a global perspective on the interconnectedness of land and sea.'
+        },
+        { 
+            title: 'Globalization and Its Impact on Geography',
+            author: 'Daniel Lee',
+            year: 2013,
+            image: 'https://books.google.co.in/books/publisher/content?id=tiODBAAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U2fGn28PIiIk0QhRTGAS2GES0LQhw&w=1280',
+            summary: 'Globalization and Its Impact on Geography examines the effects of globalization on spatial relationships, cultural landscapes, and economic activities. The book analyzes how interconnectedness influences geographic patterns.'
+        },
+        { 
+            title: 'Cultural Geography: Exploring Diversity',
+            author: 'Alice Taylor',
+            year: 2016,
+            image: 'https://books.google.co.in/books/publisher/content?id=1VCAAAAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U1Zqg1aaUQ7HsTfnD75JUTBx6_Exg&w=1280',
+            summary: 'Cultural Geography: Exploring Diversity delves into the cultural aspects of geographic spaces. The book explores the diversity of human cultures, traditions, and identities across different regions.'
+        },
+        { 
+            title: 'Landforms: A Comprehensive Study',
+            author: 'William Turner',
+            year: 2011,
+            image: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/813klIxlErL._AC_UF1000,1000_QL80_.jpg',
+            summary: 'Landforms: A Comprehensive Study provides a detailed examination of Earth\'s surface features, including mountains, valleys, plains, and more. The book explores the processes that shape these landforms.'
+        },
+        { 
+            title: 'Climate Change and Geography',
+            author: 'Laura White',
+            year: 2018,
+            image: 'https://image.slidesharecdn.com/impactsofclimatechange-150826085712-lva1-app6892/85/secondary-three-geography-impacts-of-climate-change-1-320.jpg?cb=1667529563',
+            summary: 'Climate Change and Geography explores the impact of climate change on geographic patterns, ecosystems, and human societies. The book examines the role of geography in understanding and addressing climate-related challenges.'
+        },
+        ],
+    };
+     // Function to handle navigation and load content based on route
+    function navigateTo(route) {
+        // Use the route parameter to determine what content to load
+        const content = bookData[route];
+
+        if (content) {
+            loadContent(content);
+        } else {
+            // Handle unknown routes or provide a default route
+            loadContent('Page not found.');
+        }
+    }
+
+    function loadContent(content) {
+        let html = '<div class="book-grid">';
+        
+        for (let i = 0; i < content.length; i++) {
+            const book = content[i];
+            html += `
+            <div class="book">
+                <img src="${book.image}" alt="${book.title}">
+                <div class="book-details">
+                    <p><strong>${book.title}</strong></p>
+                    <p>Author: ${book.author}</p>
+                    <p>Year of Release: ${book.year}</p>
+                <p class="summary">${book.summary}</p>
+            </div>
+        </div>
+            `;
+        }
+
+        html += '</div>';
+        document.getElementById('content').innerHTML = html;
+    }
+    function getAllBooks() {
+    // Concatenate all book arrays from bookData into a single array
+    return Object.values(bookData).reduce((allBooks, categoryBooks) => allBooks.concat(categoryBooks), []);
+}
+        // Function to handle search button click
+   function search() {
+       const searchTerm = document.querySelector('.search-bar input').value.toLowerCase();
+       const allBooks = getAllBooks(); // Implement a function to get all books data
+
+    // Filter books based on the search term
+    const matchingBooks = allBooks.filter(book => {
+        const title = book.title.toLowerCase();
+        const author = book.author.toLowerCase();
+        const summary = book.summary.toLowerCase(); // Add other fields as needed
+        return title.includes(searchTerm) || author.includes(searchTerm) || summary.includes(searchTerm);
+    });
+
+    // Display the matching books
+    loadContent(matchingBooks);
+}
+      
+        // Function to handle hash changes and trigger navigation
+        function handleHashChange() {
+            var route = window.location.hash.substring(1);
+            navigateTo(route);
+        }
+
+        // Attach the handleHashChange function to the onhashchange event
+        window.onhashchange = handleHashChange;
+
+        // Initial page load handling
+        handleHashChange(); 
+    </script>        
+   
+</body>
+
+</html>
